@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ServiceRR</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoiZmFiZGVyeCIsImEiOiJjazMxbjM3djkwOXlzM2RxanFzZ2FldTF3In0.dS3Bxq1FfT8QpqrqQrWu7g</string>
 </resources>

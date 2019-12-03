@@ -27,7 +27,6 @@ public class NotificationHelper {
     public static Notification createNotificationBuilder(Context context, String desc) {
         createNotificationChannel(context);
 
-
         Intent deleteIntent = new Intent(context, TrackingService.class);
         deleteIntent.setAction(ACTION_CLOSE);
 

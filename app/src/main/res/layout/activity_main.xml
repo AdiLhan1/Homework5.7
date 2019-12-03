@@ -5,16 +5,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:id="@+id/image_second"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_stop"
+            android:visibility="invisible" />
+    </com.mapbox.mapboxsdk.maps.MapView>
+    <ImageView
+        android:id="@+id/back_to_camera_tracking_mode"
+        android:layout_width="57dp"
+        android:layout_height="55dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toLeftOf="@+id/image"
+        app:layout_constraintBottom_toBottomOf="@id/image"
+        android:hint="Type word"/>
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_margin="35dp"
         android:layout_marginEnd="16dp"
-        android:layout_margin="16dp"
         android:src="@drawable/ic_play_circle_filled_black_24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/latitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:hint="Latitude|"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        />
+    <TextView
+        android:id="@+id/longitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/latitude"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:hint="|Longitude"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        />
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
