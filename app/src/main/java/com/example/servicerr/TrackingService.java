@@ -2,7 +2,10 @@ package com.example.servicerr;
 
 import android.app.Notification;
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
@@ -25,7 +28,28 @@ public class TrackingService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         handleIntent(intent);
+        broadcastIntent(intent);
         return START_STICKY;
+    }
+
+    private void broadcastIntent(Intent intent) {
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                if (action != null && action.equalsIgnoreCase("getting_data")) {
+                    intent.getStringExtra("value");
+                }
+            }
+        };
+
+        IntentFilter intentFilter = new IntentFilter();
+        // set the custom action
+        intentFilter.addAction("getting_data"); //Action is just a string used to identify the receiver as there can be many in your app so it helps deciding which receiver should receive the intent.
+        // register the receiver
+        registerReceiver(broadcastReceiver, intentFilter);
+
+
     }
 
     private void handleIntent(Intent intent) {

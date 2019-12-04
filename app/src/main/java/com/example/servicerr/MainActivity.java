@@ -1,9 +1,11 @@
 package com.example.servicerr;
 
 import android.Manifest;
+import android.app.Service;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,7 +47,6 @@ import java.util.ArrayList;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, OnLocationClickListener, OnCameraTrackingChangedListener, MapboxMap.OnMapClickListener {
-
     private EditText etDesc;
     private ImageView imageView, image;
     private MapView mapView;
@@ -69,6 +70,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapView.getMapAsync(this);
     }
 
+    public void addInService(Location location) {
+        String latitudeStr = String.valueOf(location.getLatitude());
+        String longitudeStr = String.valueOf(location.getLongitude());
+        Intent broadcast1 = new Intent("getting_data");
+        broadcast1.putExtra("value", latitudeStr);
+        broadcast1.putExtra("value", longitudeStr);
+        sendBroadcast(broadcast1);
+
+    }
+
     public void requestLocationUpdates(Style loadedMapStyle) {
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -76,12 +87,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener(MainActivity.this, location -> {
             if (location != null) {
                 Log.e(TAG, "onSuccess: " + location);
-                latitude.setText(String.valueOf(location.getLatitude()));
-                longitude.setText(String.valueOf(location.getLongitude()));
-                ArrayList<Integer> locations=new ArrayList<>();
-                locations.add((int) location.getLatitude());
-                locations.add((int) location.getLongitude());
-                
+                String latitudeStr = String.valueOf(location.getLatitude());
+                String longitudeStr = String.valueOf(location.getLongitude());
+                latitude.setText(latitudeStr);
+                longitude.setText(longitudeStr);
+                addInService(location);
+
             }
         });
         LocationComponentOptions customLocationComponentOptions = LocationComponentOptions.builder(this)
