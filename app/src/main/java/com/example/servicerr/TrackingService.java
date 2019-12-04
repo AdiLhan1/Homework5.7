@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -38,7 +39,9 @@ public class TrackingService extends Service {
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
                 if (action != null && action.equalsIgnoreCase("getting_data")) {
-                    intent.getStringExtra("value");
+                    String value=intent.getStringExtra("value");
+                    String value2=intent.getStringExtra("value2");
+                    Log.e("TAG", "Latitude: "+value+"\n"+" Longitude:"+value2 );
                 }
             }
         };

@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         String longitudeStr = String.valueOf(location.getLongitude());
         Intent broadcast1 = new Intent("getting_data");
         broadcast1.putExtra("value", latitudeStr);
-        broadcast1.putExtra("value", longitudeStr);
+        broadcast1.putExtra("value2", longitudeStr);
         sendBroadcast(broadcast1);
 
     }
